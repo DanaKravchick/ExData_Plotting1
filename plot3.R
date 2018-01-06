@@ -1,0 +1,12 @@
+file<- "/Users/dana/Library/Mobile Documents/com~apple~CloudDocs/Data Science specialization/Exploratory data analysis/Week1/smaller.txt"
+Input_txt<-read.csv.sql(file, sep = ";", sql = "select * from file where Date =\"1/2/2007\" OR Date =\"2/2/2007\"")
+View(Input_txt)
+dev.set(4)
+png(filename = "plot3.png", width = 480, height = 480, units = "px")
+par(mfrow=c(2,2))
+plot((strptime(paste(Input_txt$Date, Input_txt$Time),format = "%d/%m/%Y %H:%M:%S")), Input_txt$Global_active_power, type="l", ylab = "Energy sub metering", xlab="")
+plot((strptime(paste(Input_txt$Date, Input_txt$Time),format = "%d/%m/%Y %H:%M:%S")), Input_txt$Sub_metering_1, type="l", ylab = "Energy sub metering", xlab="")
+lines((strptime(paste(Input_txt$Date, Input_txt$Time),format = "%d/%m/%Y %H:%M:%S")), Input_txt$Sub_metering_2, type="l", col="red", xlab="")
+lines((strptime(paste(Input_txt$Date, Input_txt$Time),format = "%d/%m/%Y %H:%M:%S")), Input_txt$Sub_metering_3, type="l", col="blue", xlab="")
+legend("topright", legend = c("Sub_metering_1","sub_metering_2", "sub_metering_3"),lty=1, col = c("black","red","blue"), border = "black")
+dev.off()
